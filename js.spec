@@ -135,13 +135,16 @@ Modu³ perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 %setup -q -n %{name}
 %patch -p1
 
+echo 'SONAME=libjs.so.0' >> src/Makefile.ref
+echo 'SONAME=libjsj.so.0' >> src/liveconnect/Makefile.ref
+
 %build
 %{__make} -C src -f Makefile.ref \
 	%{!?debug:BUILD_OPT=1} \
 	OPTIMIZER="%{rpmcflags} -DHAVE_VA_COPY -DVA_COPY=va_copy" \
 	JS_READLINE=1 \
 	CC="%{__cc}" \
-	MKSHLIB="%{__cc} -shared -Wl,-soname=libjs.so.0" \
+	MKSHLIB="%{__cc} -shared -Wl,-soname=\$(SONAME)" \
 	%{?with_threads:JS_THREADSAFE=1} \
 	%{?with_java:JS_LIVECONNECT=1 JDK=/usr/lib/java}
 
@@ -178,7 +181,9 @@ install js.msg jsapi.h jsarray.h jsarena.h jsatom.h jsbit.h jsbool.h \
 	$RPM_BUILD_ROOT%{_includedir}/js
 
 %if %{with java}
-install liveconnect/Linux*/libjsj.{a,so} $RPM_BUILD_ROOT%{_libdir}
+install liveconnect/Linux*/libjsj.a $RPM_BUILD_ROOT%{_libdir}
+install liveconnect/Linux*/libjsj.so $RPM_BUILD_ROOT%{_libdir}/libjsj.so.0.1.0
+ln -sf libjsj.so.0 $RPM_BUILD_ROOT%{_libdir}/libjsj.so
 install liveconnect/Linux*/lcshell $RPM_BUILD_ROOT%{_bindir}
 install liveconnect/classes/Linux*/*.jar $RPM_BUILD_ROOT%{classdir}
 install liveconnect/{jsjava.h,nsI*.h,_jni/*.h} $RPM_BUILD_ROOT%{_includedir}/js
@@ -221,11 +226,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc src/liveconnect/README.html
 %attr(755,root,root) %{_bindir}/lcshell
-%attr(755,root,root) %{_libdir}/libjsj.so
+%attr(755,root,root) %{_libdir}/libjsj.so.*.*.*
 %{classdir}/*.jar
 
 %files java-devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libjsj.so
 %{_includedir}/js/jsjava.h
 %{_includedir}/js/n*.h
 
