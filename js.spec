@@ -17,6 +17,7 @@ Patch0:		%{name}-makefile.patch
 URL:		http://www.mozilla.org/js/
 %{?_with_java:BuildRequires: jdk}
 %{?_with_threads:BuildRequires:	nspr-devel}
+BuildRequires:	perl-devel
 BuildRequires:	readline-devel
 BuildRequires:	rpm-perlprov
 Conflicts:	njs
