@@ -8,8 +8,8 @@ Summary:	JavaScript Reference Implementation
 Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.5
-%define	rcver	rc4a
-Release:	0.%{rcver}.2
+%define	rcver	rc5
+Release:	0.%{rcver}.1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
 Source0:	http://ftp.mozilla.org/pub/js/%{name}-%{version}-%{rcver}.tar.gz
@@ -134,6 +134,8 @@ Modu³ perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 %patch -p1
 
 %build
+#make -C src -f Makefile.ref BUILD_OPT=1 XMKSHLIBOPTS="-soname libjs.so.0"
+
 %{__make} -C src -f Makefile.ref \
 	%{!?debug:BUILD_OPT=1} \
 	OPTIMIZER="%{rpmcflags}" \
@@ -236,6 +238,6 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/jsperlbuild.pl
 %dir %{perl_vendorarch}/auto/JS
 %{perl_vendorarch}/auto/JS/JS.bs
-%attr(755,root,root) %{perl_vendorarch}/auto/JS/JS.so
+#%attr(755,root,root) %{perl_vendorarch}/auto/JS/JS.so
 # unusable now (helper module for PerlConnect in libjs, which is not built)
 #%%{perl_vendorarch}/PerlConnect.pm
