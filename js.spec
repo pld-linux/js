@@ -122,16 +122,16 @@ JavaScript Live Connect 3 implementation static library.
 Biblioteka statyczna implementacji JavaScript LiveConnect 3.
 
 %package -n perl-JS
-Summary:	JS perl module - interface to JavaScript
-Summary(pl):	Modu³ perla JS - interfejs do JavaScriptu
+Summary:	JS Perl module - interface to JavaScript
+Summary(pl):	Modu³ Perla JS - interfejs do JavaScriptu
 Group:		Development/Languages/Perl
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description -n perl-JS
-JS perl module allows calling JavaScript from Perl.
+JS Perl module allows calling JavaScript from Perl.
 
 %description -n perl-JS -l pl
-Modu³ perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
+Modu³ Perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 
 %prep
 %setup -q -n %{name}
