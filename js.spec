@@ -140,7 +140,8 @@ Modu³ perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 	%{!?debug:BUILD_OPT=1} \
 	OPTIMIZER="%{rpmcflags} -DHAVE_VA_COPY -DVA_COPY=va_copy" \
 	JS_READLINE=1 \
-	XMKSHLIBOPTS="-soname libjs.so.0" \
+	CC="%{__cc}" \
+	MKSHLIB="%{__cc} -shared -Wl,-soname=libjs.so.0" \
 	%{?with_threads:JS_THREADSAFE=1} \
 	%{?with_java:JS_LIVECONNECT=1 JDK=/usr/lib/java}
 
