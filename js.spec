@@ -9,7 +9,7 @@ Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.5
 %define	rcver	rc6
-Release:	0.%{rcver}.1
+Release:	0.%{rcver}.2
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}-%{rcver}.tar.gz
@@ -140,6 +140,7 @@ Modu³ perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 	%{!?debug:BUILD_OPT=1} \
 	OPTIMIZER="%{rpmcflags} -DHAVE_VA_COPY -DVA_COPY=va_copy" \
 	JS_READLINE=1 \
+	XMKSHLIBOPTS="-soname libjs.so.0" \
 	%{?with_threads:JS_THREADSAFE=1} \
 	%{?with_java:JS_LIVECONNECT=1 JDK=/usr/lib/java}
 
@@ -163,7 +164,9 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_includedir}/js,%{classdir}}
 
 cd src
 install Linux*/{js,jscpucfg} $RPM_BUILD_ROOT%{_bindir}
-install Linux*/libjs.{a,so} $RPM_BUILD_ROOT%{_libdir}
+install Linux*/libjs.a $RPM_BUILD_ROOT%{_libdir}
+install Linux*/libjs.so $RPM_BUILD_ROOT%{_libdir}/libjs.so.0.1.0
+ln -sf libjs.so.0 $RPM_BUILD_ROOT%{_libdir}/libjs.so
 install Linux*/jsautocfg.h $RPM_BUILD_ROOT%{_includedir}/js
 install js.msg jsapi.h jsarray.h jsarena.h jsatom.h jsbit.h jsbool.h \
 	jsclist.h jscntxt.h jscompat.h jsconfig.h jsdate.h jsdbgapi.h \
@@ -198,10 +201,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc src/README*.html
 %attr(755,root,root) %{_bindir}/js*
-%attr(755,root,root) %{_libdir}/libjs.so
+%attr(755,root,root) %{_libdir}/libjs.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libjs.so
 %dir %{_includedir}/js
 %{_includedir}/js/js.msg
 %{_includedir}/js/jsopcode.tbl
