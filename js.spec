@@ -9,7 +9,7 @@ Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.5
 %define	rcver	rc4a
-Release:	0.%{rcver}.1
+Release:	0.%{rcver}.2
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
 Source0:	http://ftp.mozilla.org/pub/js/%{name}-%{version}-%{rcver}.tar.gz
@@ -145,7 +145,9 @@ Modu³ perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 #	JS_PERLCONNECT=1
 
 cd src/perlconnect
-%{!?debug:BUILD_OPT=1} perl Makefile.PL
+%{__perl} Makefile.PL \
+	INSTALLDIRS=vendor \
+	%{!?debug:BUILD_OPT=1}
 
 %{__make} \
 	OPTIMIZE="%{rpmcflags}"
@@ -230,10 +232,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n perl-JS
 %defattr(644,root,root,755)
-%{perl_sitearch}/JS.pm
-%{perl_sitearch}/jsperlbuild.pl
-%dir %{perl_sitearch}/auto/JS
-%{perl_sitearch}/auto/JS/JS.bs
-%attr(755,root,root) %{perl_sitearch}/auto/JS/JS.so
+%{perl_vendorarch}/JS.pm
+%{perl_vendorarch}/jsperlbuild.pl
+%dir %{perl_vendorarch}/auto/JS
+%{perl_vendorarch}/auto/JS/JS.bs
+%attr(755,root,root) %{perl_vendorarch}/auto/JS/JS.so
 # unusable now (helper module for PerlConnect in libjs, which is not built)
-#%%{perl_sitearch}/PerlConnect.pm
+#%%{perl_vendorarch}/PerlConnect.pm
