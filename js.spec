@@ -8,7 +8,7 @@ Summary:	JavaScript Reference Implementation
 Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.5
-%define	rcver	rc5
+%define	rcver	rc5a
 Release:	0.%{rcver}.1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
@@ -136,8 +136,6 @@ Modu³ perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 %patch -p1
 
 %build
-#make -C src -f Makefile.ref BUILD_OPT=1 XMKSHLIBOPTS="-soname libjs.so.0"
-
 %{__make} -C src -f Makefile.ref \
 	%{!?debug:BUILD_OPT=1} \
 	OPTIMIZER="%{rpmcflags}" \
