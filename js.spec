@@ -8,12 +8,12 @@ Summary:	JavaScript Reference Implementation
 Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.5
-%define	rcver	rc5a
+%define	rcver	rc6
 Release:	0.%{rcver}.1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
-Source0:	http://ftp.mozilla.org/pub/js/%{name}-%{version}-%{rcver}.tar.gz
-# Source0-md5:	001fae2f953c2bbc0b495ee0823a3539
+Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}-%{rcver}.tar.gz
+# Source0-md5:	ffb1c63d5c828a7e3251356e7df3c807
 Patch0:		%{name}-makefile.patch
 URL:		http://www.mozilla.org/js/
 %{?with_java:BuildRequires:	jdk}
@@ -44,7 +44,7 @@ skryptów.
 Summary:	Header files for JavaScript reference library
 Summary(pl):	Pliki nag³ówkowe do biblioteki JavaScript
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Conflicts:	njs-devel
 
 %description devel
@@ -57,7 +57,7 @@ Pliki nag³ówkowe do biblioteki JavaScript.
 Summary:	Static JavaScript reference library
 Summary(pl):	Statyczna biblioteka JavaScript
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 Conflicts:	njs-static
 
 %description static
@@ -70,7 +70,7 @@ Statyczna wersja biblioteki JavaScript.
 Summary:	JavaScript LiveConnect Version 3 implementation
 Summary(pl):	Implementacja JavaScript LiveConnect w wersji 3
 Group:		Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Conflicts:	mozilla
 Conflicts:	mozilla-embedded
 
@@ -98,8 +98,8 @@ osadzaæ w innych projektach, takich jak przegl±darka Mozilla.
 Summary:	JavaScript LiveConnect 3 implementation header files
 Summary(pl):	Pliki nag³ówkowe implementacji JavaScript LiveConnect 3
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
-Requires:	%{name}-java = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-java = %{version}-%{release}
 
 %description java-devel
 JavaScript LiveConnect 3 implementation header files.
@@ -111,7 +111,7 @@ Pliki nag³ówkowe implementacji JavaScript LiveConnect 3.
 Summary:	JavaScript Live Connect 3 implementation static library
 Summary(pl):	Biblioteka statyczna implementacji JavaScript LiveConnect 3
 Group:		Development/Libraries
-Requires:	%{name}-java-devel = %{version}
+Requires:	%{name}-java-devel = %{version}-%{release}
 
 %description java-static
 JavaScript Live Connect 3 implementation static library.
@@ -123,7 +123,7 @@ Biblioteka statyczna implementacji JavaScript LiveConnect 3.
 Summary:	JS perl module - interface to JavaScript
 Summary(pl):	Modu³ perla JS - interfejs do JavaScriptu
 Group:		Development/Languages/Perl
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description -n perl-JS
 JS perl module allows calling JavaScript from Perl.
