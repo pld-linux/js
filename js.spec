@@ -1,7 +1,7 @@
 #
 # Conditional build:
-# _with_threads	- build thread-safe library (requires nspr)
-# _with_java	- with libjsj and lshell
+%bcond_with	threads	# build thread-safe library (requires nspr)
+%bcond_with	java	# with libjsj and lshell
 #
 %include        /usr/lib/rpm/macros.perl
 Summary:	JavaScript Reference Implementation
@@ -16,8 +16,8 @@ Source0:	http://ftp.mozilla.org/pub/js/%{name}-%{version}-%{rcver}.tar.gz
 # Source0-md5:	001fae2f953c2bbc0b495ee0823a3539
 Patch0:		%{name}-makefile.patch
 URL:		http://www.mozilla.org/js/
-%{?_with_java:BuildRequires:	jdk}
-%{?_with_threads:BuildRequires:	nspr-devel}
+%{?with_java:BuildRequires:	jdk}
+%{?with_threads:BuildRequires:	nspr-devel}
 BuildRequires:	perl-devel
 BuildRequires:	readline-devel
 BuildRequires:	rpm-perlprov
@@ -141,8 +141,8 @@ Modu³ perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 	%{!?debug:BUILD_OPT=1} \
 	OPTIMIZER="%{rpmcflags}" \
 	JS_READLINE=1 \
-	%{?_with_threads:JS_THREADSAFE=1} \
-	%{?_with_java:JS_LIVECONNECT=1 JDK=/usr/lib/java}
+	%{?with_threads:JS_THREADSAFE=1} \
+	%{?with_java:JS_LIVECONNECT=1 JDK=/usr/lib/java}
 
 # js segfaults when jsperl is compiled in
 #	JS_PERLCONNECT=1
@@ -174,7 +174,7 @@ install js.msg jsapi.h jsarray.h jsarena.h jsatom.h jsbit.h jsbool.h \
 	jsscope.h jsscript.h jsstr.h jstypes.h jsutil.h jsxdrapi.h jsstddef.h \
 	$RPM_BUILD_ROOT%{_includedir}/js
 
-%if 0%{?_with_java:1}
+%if %{with java}
 install liveconnect/Linux*/libjsj.{a,so} $RPM_BUILD_ROOT%{_libdir}
 install liveconnect/Linux*/lcshell $RPM_BUILD_ROOT%{_bindir}
 install liveconnect/classes/Linux*/*.jar $RPM_BUILD_ROOT%{classdir}
@@ -212,7 +212,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libjs.a
 
-%if 0%{?_with_java:1}
+%if %{with java}
 %files java
 %defattr(644,root,root,755)
 %doc src/liveconnect/README.html
