@@ -12,7 +12,7 @@ Version:	1.5
 Release:	0.%{rcver}.1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
-Source0:	http://ftp.mozilla.org/pub/js/%{name}-%{version}-%{rcver}.tar.gz
+Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}-%{rcver}.tar.gz
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-notermcap.patch
 URL:		http://www.mozilla.org/js/
