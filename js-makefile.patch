@@ -80,3 +80,15 @@
  
  # To run lcshell with the above, built in a Mozilla tree with a local nspr:
  # LD_LIBRARY_PATH=../../../dist/lib:/share/builds/components/jdk/1.2.2/Linux/jre/lib/i386:/share/builds/components/jdk/1.2.2/Linux/jre/lib/i386/classic:/share/builds/components/jdk/1.2.2/Linux/jre/lib/i386/native_threads CLASSPATH=./classes/Linux_All_DBG.OBJ/js15lc30.jar lcshell
+--- js/src/rules.mk.orig	2003-11-15 01:11:04.000000000 +0100
++++ js/src/rules.mk	2004-03-24 16:33:03.000000000 +0100
+@@ -73,6 +73,9 @@
+ 	@$(MAKE_OBJDIR)
+ 	$(CC) -o $@ -c $(CFLAGS) $*.c
+ 
++$(LIB_OBJS): $(OBJDIR)/%.o: %.c
++	@$(MAKE_OBJDIR)
++	$(CC) -o $@ -fPIC -c $(CFLAGS) $*.c
+ 
+ $(OBJDIR)/%.o: %.c
+ 	@$(MAKE_OBJDIR)
