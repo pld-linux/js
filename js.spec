@@ -10,7 +10,7 @@ Name:		js
 Version:	1.5
 %define	rcver	rc6a
 Release:	0.%{rcver}.1
-Epoch:	1
+Epoch:		1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}-%{rcver}.tar.gz
