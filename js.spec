@@ -181,7 +181,7 @@ cd perlconnect
 	DESTDIR=$RPM_BUILD_ROOT
 
 cd ..
-#%{?_with_java:mv -f liveconnect/README.html README-liveconnect.html}
+#%%{?_with_java:mv -f liveconnect/README.html README-liveconnect.html}
 mv -f perlconnect/README.html README-perlconnect.html
 
 %clean
@@ -236,4 +236,4 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_sitearch}/auto/JS/JS.bs
 %attr(755,root,root) %{perl_sitearch}/auto/JS/JS.so
 # unusable now (helper module for PerlConnect in libjs, which is not built)
-#%{perl_sitearch}/PerlConnect.pm
+#%%{perl_sitearch}/PerlConnect.pm
