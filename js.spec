@@ -15,7 +15,6 @@ License:	GPL or Netscape Public License 1.1
 Group:		Libraries
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}-%{rcver}.tar.gz
 # Source0-md5:	25e1d1dd2674d85883391b6b42a7b02f
-# Source0-size:	1058911
 Patch0:		%{name}-makefile.patch
 URL:		http://www.mozilla.org/js/
 %{?with_java:BuildRequires:	jdk}
