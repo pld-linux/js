@@ -138,7 +138,7 @@ Modu³ perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 %build
 %{__make} -C src -f Makefile.ref \
 	%{!?debug:BUILD_OPT=1} \
-	OPTIMIZER="%{rpmcflags}" \
+	OPTIMIZER="%{rpmcflags} -DVA_COPY=va_copy" \
 	JS_READLINE=1 \
 	%{?with_threads:JS_THREADSAFE=1} \
 	%{?with_java:JS_LIVECONNECT=1 JDK=/usr/lib/java}
