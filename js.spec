@@ -19,6 +19,7 @@ URL:		http://www.mozilla.org/js/
 %{?_with_threads:BuildRequires:	nspr-devel}
 BuildRequires:	readline-devel
 BuildRequires:	rpm-perlprov
+Obsoletes:	njs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
