@@ -26,7 +26,7 @@ BuildRequires:	rpm-perlprov
 Conflicts:	njs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		classdir	/usr/share/java
+%define		classdir	%{_datadir}/java
 
 %description
 JavaScript Reference Implementation (codename SpiderMonkey). The
@@ -148,7 +148,7 @@ echo 'SONAME=libjsj.so.0' >> src/liveconnect/Makefile.ref
 	CC="%{__cc}" \
 	MKSHLIB="%{__cc} -shared -Wl,-soname=\$(SONAME)" \
 	%{?with_threads:JS_THREADSAFE=1} \
-	%{?with_java:JS_LIVECONNECT=1 JDK=/usr/lib/java}
+	%{?with_java:JS_LIVECONNECT=1 JDK=%{_libdir}/java}
 
 # js segfaults when jsperl is compiled in
 #	JS_PERLCONNECT=1
