@@ -16,12 +16,12 @@ Source0:	http://ftp.mozilla.org/pub/js/%{name}-%{version}-%{rcver}.tar.gz
 # Source0-md5:	001fae2f953c2bbc0b495ee0823a3539
 Patch0:		%{name}-makefile.patch
 URL:		http://www.mozilla.org/js/
-%{?_with_java:BuildRequires: jdk}
+%{?_with_java:BuildRequires:	jdk}
 %{?_with_threads:BuildRequires:	nspr-devel}
 BuildRequires:	perl-devel
 BuildRequires:	readline-devel
 BuildRequires:	rpm-perlprov
-BuildRequires:  kernel-headers
+BuildRequires:	kernel-headers
 Conflicts:	njs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
