@@ -147,9 +147,9 @@ Modu³ perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 #	JS_PERLCONNECT=1
 
 cd src/perlconnect
+%{!?debug:BUILD_OPT=1} \
 %{__perl} Makefile.PL \
-	INSTALLDIRS=vendor \
-	%{!?debug:BUILD_OPT=1}
+	INSTALLDIRS=vendor
 
 %{__make} \
 	OPTIMIZE="%{rpmcflags}"
@@ -180,12 +180,9 @@ install liveconnect/classes/Linux*/*.jar $RPM_BUILD_ROOT%{classdir}
 install liveconnect/{jsjava.h,nsI*.h,_jni/*.h} $RPM_BUILD_ROOT%{_includedir}/js
 %endif
 
-cd perlconnect
-%{__make} install \
+%{__make} -C perlconnect install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-cd ..
-#%%{?_with_java:mv -f liveconnect/README.html README-liveconnect.html}
 mv -f perlconnect/README.html README-perlconnect.html
 
 %clean
@@ -238,6 +235,6 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/jsperlbuild.pl
 %dir %{perl_vendorarch}/auto/JS
 %{perl_vendorarch}/auto/JS/JS.bs
-#%attr(755,root,root) %{perl_vendorarch}/auto/JS/JS.so
+%attr(755,root,root) %{perl_vendorarch}/auto/JS/JS.so
 # unusable now (helper module for PerlConnect in libjs, which is not built)
 #%%{perl_vendorarch}/PerlConnect.pm
