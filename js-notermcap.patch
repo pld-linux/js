@@ -1,0 +1,12 @@
+diff -urN js.orig/src/Makefile.ref js/src/Makefile.ref
+--- js.orig/src/Makefile.ref	Thu May 20 11:26:41 2004
++++ js/src/Makefile.ref	Thu May 20 11:56:57 2004
+@@ -127,7 +127,7 @@
+ ifdef JS_READLINE
+ # For those platforms with the readline library installed.
+ DEFINES += -DEDITLINE
+-PROG_LIBS += -lreadline -ltermcap
++PROG_LIBS += -lreadline
+ else
+ ifdef JS_EDITLINE
+ # Use the editline library, built locally.
