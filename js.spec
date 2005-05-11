@@ -9,7 +9,7 @@ Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.5
 %define	rcver	rc6a
-Release:	0.%{rcver}.1
+Release:	1.%{rcver}.1
 Epoch:		1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
@@ -193,7 +193,7 @@ install liveconnect/{jsjava.h,nsI*.h,_jni/*.h} $RPM_BUILD_ROOT%{_includedir}/js
 %{__make} -C perlconnect install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv -f perlconnect/README.html README-perlconnect.html
+cp -f perlconnect/README.html README-perlconnect.html
 
 %clean
 rm -rf $RPM_BUILD_ROOT
