@@ -9,7 +9,7 @@ Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.5
 %define	rcver	rc6a
-Release:	1.%{rcver}.2
+Release:	1.%{rcver}.3
 Epoch:		1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
