@@ -8,13 +8,12 @@ Summary:	JavaScript Reference Implementation
 Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.5
-%define	rcver	rc6a
-Release:	1.%{rcver}.3
+Release:	2
 Epoch:		1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
-Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}-%{rcver}.tar.gz
-# Source0-md5:	25e1d1dd2674d85883391b6b42a7b02f
+Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}.tar.gz
+# Source0-md5:	863bb6462f4ce535399a7c6276ae6776
 Patch0:		%{name}-makefile.patch
 URL:		http://www.mozilla.org/js/
 %{?with_java:BuildRequires:	jdk}
