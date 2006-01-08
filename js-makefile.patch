@@ -37,12 +37,21 @@
  
 --- js/src/perlconnect/Makefile.PL.orig	Tue Aug 14 15:09:43 2001
 +++ js/src/perlconnect/Makefile.PL	Sat May 18 16:32:49 2002
+@@ -29,7 +29,7 @@
+ include ../config.mk
+ 
+ all:
+-	@echo '$(OBJDIR)'
++	@echo '$(OBJDIR)' >&2
+ eof
+ 
+ if ($foo{'m'}) {
 @@ -40,7 +40,7 @@
  	open FOO, ">tempmakefile";
  	print FOO $tmpmk;
  	close FOO;
 -	my $objdir = `gmake -f tempmakefile`;
-+	my $objdir = `make -f tempmakefile`;
++	my $objdir = `make -f tempmakefile 2>&1 >/dev/null`;
  	unlink "tempmakefile";
  	$inc = "-I.. -I../$objdir";
  	$libpath = "-L../$objdir";
