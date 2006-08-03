@@ -133,7 +133,7 @@ Modu³ Perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
 
 %prep
 %setup -q -n %{name}
-%patch -p1
+%patch0 -p1
 
 echo 'SONAME=libjs.so.0' >> src/Makefile.ref
 echo 'SONAME=libjsj.so.0' >> src/liveconnect/Makefile.ref
@@ -144,6 +144,7 @@ echo 'SONAME=libjsj.so.0' >> src/liveconnect/Makefile.ref
 	OPTIMIZER="%{rpmcflags} -DHAVE_VA_COPY -DVA_COPY=va_copy" \
 	JS_READLINE=1 \
 	CC="%{__cc}" \
+	LDFLAGS="%{rpmldflags}" \
 	MKSHLIB="%{__cc} -shared -Wl,-soname=\$(SONAME)" \
 	%{?with_threads:JS_THREADSAFE=1} \
 	%{?with_java:JS_LIVECONNECT=1 JDK=%{_libdir}/java}
