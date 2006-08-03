@@ -31,7 +31,7 @@
  else
  $(PROGRAM): $(PROG_OBJS) $(LIBRARY) $(FDLIBM_LIBRARY)
 -	$(CC) -o $@ $(CFLAGS) $(PROG_OBJS) $(LIBRARY) $(LDFLAGS) $(OTHER_LIBS) \
-+	$(CC) -o $@ $(CFLAGS) $(PROG_OBJS) -L$(OBJDIR) -ljs $(LDFLAGS) $(OTHER_LIBS) \
++	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(PROG_OBJS) -L$(OBJDIR) -ljs $(OTHER_LIBS) \
  	    $(PROG_LIBS)
  endif
  
@@ -71,7 +71,7 @@
  $(PROGRAM): $(OBJDIR)/$(PROG_FILE).o $(OBJDIR)/jsj_simpleapi.o
  	@$(MAKE_OBJDIR)
 -	$(CC) -o $@ $(CFLAGS) $+ $(LIBRARY) ../$(OBJDIR)/libjs.a $(LDFLAGS) $(OTHER_LIBS)
-+	$(CC) -o $@ $(CFLAGS) $+ -L$(OBJDIR) -ljsj $(LDFLAGS) $(OTHER_LIBS) $(PROG_LIBS) -Wl,-rpath=$(JDK)/jre/lib/i386 -Wl,-rpath=$(JDK)/jre/lib/i386/native_threads -Wl,-rpath=$(JDK)/jre/lib/i386/classic -Wl,-rpath=$(JDK)/jre/lib/i386/client
++	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $+ -L$(OBJDIR) -ljsj $(OTHER_LIBS) $(PROG_LIBS) -Wl,-rpath=$(JDK)/jre/lib/i386 -Wl,-rpath=$(JDK)/jre/lib/i386/native_threads -Wl,-rpath=$(JDK)/jre/lib/i386/classic -Wl,-rpath=$(JDK)/jre/lib/i386/client
  endif
 --- js/src/liveconnect/config/Linux_All.mk.orig	Tue Mar 19 05:28:53 2002
 +++ js/src/liveconnect/config/Linux_All.mk	Sat May 18 18:51:49 2002
@@ -101,3 +101,12 @@
  
  $(OBJDIR)/%.o: %.c
  	@$(MAKE_OBJDIR)
+@@ -118,7 +118,7 @@
+ 	$(RANLIB) $@
+ 
+ $(SHARED_LIBRARY): $(LIB_OBJS)
+-	$(MKSHLIB) -o $@ $(LIB_OBJS) $(LDFLAGS) $(OTHER_LIBS)
++	$(MKSHLIB) $(LDFLAGS) -o $@ $(LIB_OBJS) $(OTHER_LIBS)
+ endif
+ endif
+ 
