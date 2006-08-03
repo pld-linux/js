@@ -106,7 +106,7 @@
  
  $(SHARED_LIBRARY): $(LIB_OBJS)
 -	$(MKSHLIB) -o $@ $(LIB_OBJS) $(LDFLAGS) $(OTHER_LIBS)
-+	$(MKSHLIB) $(LDFLAGS) -o $@ $(LIB_OBJS) $(OTHER_LIBS)
++	$(MKSHLIB) $(LDFLAGS) -o $@ $(LIB_OBJS) $(OTHER_LIBS) -lm
  endif
  endif
  
