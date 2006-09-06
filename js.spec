@@ -139,7 +139,7 @@ echo 'SONAME=libjs.so.0' >> src/Makefile.ref
 echo 'SONAME=libjsj.so.0' >> src/liveconnect/Makefile.ref
 
 %build
-%{__make} -C src -f Makefile.ref \
+%{__make} -j1 -C src -f Makefile.ref \
 	%{!?debug:BUILD_OPT=1} \
 	OPTIMIZER="%{rpmcflags} -DHAVE_VA_COPY -DVA_COPY=va_copy" \
 	JS_READLINE=1 \
