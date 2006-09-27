@@ -8,7 +8,7 @@ Summary:	JavaScript Reference Implementation
 Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.5
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
@@ -22,6 +22,7 @@ BuildRequires:	perl-devel
 BuildRequires:	readline-devel
 BuildRequires:	rpm-perlprov
 Conflicts:	njs
+%{?with_threads:Provides:	js(threads)}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		classdir	%{_datadir}/java
@@ -46,6 +47,7 @@ Summary(pl):	Pliki nag³ówkowe do biblioteki JavaScript
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Conflicts:	njs-devel
+%{?with_threads:Provides:	js-devel(threads)}
 
 %description devel
 Header files for JavaScript reference library.
@@ -59,6 +61,7 @@ Summary(pl):	Statyczna biblioteka JavaScript
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Conflicts:	njs-static
+%{?with_threads:Provides:	js-static(threads)}
 
 %description static
 Static version of JavaScript reference library.
