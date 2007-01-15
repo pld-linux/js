@@ -7,16 +7,17 @@
 Summary:	JavaScript Reference Implementation
 Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
-Version:	1.5
-Release:	3
+Version:	1.60
+Release:	1
 Epoch:		1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}.tar.gz
-# Source0-md5:	863bb6462f4ce535399a7c6276ae6776
+# Source0-md5:	bd8f021e43a8fbbec55ac2cd3d483243
 Patch0:		%{name}-makefile.patch
 URL:		http://www.mozilla.org/js/
 %{?with_java:BuildRequires:	jdk}
+%{?with_java:BuildRequires:	jpackage-utils}
 %{?with_threads:BuildRequires:	nspr-devel}
 BuildRequires:	perl-devel
 BuildRequires:	readline-devel
@@ -150,7 +151,7 @@ echo 'SONAME=libjsj.so.0' >> src/liveconnect/Makefile.ref
 	LDFLAGS="%{rpmldflags}" \
 	MKSHLIB="%{__cc} -shared -Wl,-soname=\$(SONAME)" \
 	%{?with_threads:JS_THREADSAFE=1} \
-	%{?with_java:JS_LIVECONNECT=1 JDK=%{_libdir}/java}
+	%{?with_java:JS_LIVECONNECT=1 JDK=%{java_home}}
 
 # js segfaults when jsperl is compiled in
 #	JS_PERLCONNECT=1
@@ -193,7 +194,7 @@ install liveconnect/classes/Linux*/*.jar $RPM_BUILD_ROOT%{classdir}
 install liveconnect/{jsjava.h,nsI*.h,_jni/*.h} $RPM_BUILD_ROOT%{_includedir}/js
 %endif
 
-%{__make} -C perlconnect install \
+%{__make} -C perlconnect pure_install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 cp -f perlconnect/README.html README-perlconnect.html
