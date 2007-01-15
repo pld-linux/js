@@ -22,6 +22,7 @@ URL:		http://www.mozilla.org/js/
 BuildRequires:	perl-devel
 BuildRequires:	readline-devel
 BuildRequires:	rpm-perlprov
+BuildRequires:	rpmbuild(macros) >= 1.294
 Conflicts:	njs
 %{?with_threads:Provides:	js(threads)}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
