@@ -12,7 +12,7 @@ Summary:	JavaScript Reference Implementation
 Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.60
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
@@ -217,7 +217,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc src/README*.html
 %attr(755,root,root) %{_bindir}/js*
-%attr(755,root,root) %{_libdir}/libjs.so.*.*.*
+%attr(755,root,root) %{_libdir}/libjs.so.*
 
 %files devel
 %defattr(644,root,root,755)
