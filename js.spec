@@ -204,6 +204,8 @@ install liveconnect/{jsjava.h,nsI*.h,_jni/*.h} $RPM_BUILD_ROOT%{_includedir}/js
 
 cp -f perlconnect/README.html README-perlconnect.html
 
+/sbin/ldconfig -n -N $RPM_BUILD_ROOT%{_libdir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
