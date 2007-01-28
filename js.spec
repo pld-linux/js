@@ -1,14 +1,18 @@
 #
 # Conditional build:
-%bcond_with	threads	# build thread-safe library (requires nspr)
+%bcond_without	threads	# build thread-safe library (requires nspr)
 %bcond_with	java	# with libjsj and lshell
+#
+%ifarch i386 i486 ppc ppc64
+%undefine	with_java
+%endif
 #
 %include        /usr/lib/rpm/macros.perl
 Summary:	JavaScript Reference Implementation
 Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.60
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
