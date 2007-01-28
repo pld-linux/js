@@ -12,7 +12,7 @@ Summary:	JavaScript Reference Implementation
 Summary(pl):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.60
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL or Netscape Public License 1.1
 Group:		Libraries
@@ -236,7 +236,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc src/liveconnect/README.html
 %attr(755,root,root) %{_bindir}/lcshell
-%attr(755,root,root) %{_libdir}/libjsj.so.*.*.*
+%attr(755,root,root) %{_libdir}/libjsj.so.*
 %{classdir}/*.jar
 
 %files java-devel
