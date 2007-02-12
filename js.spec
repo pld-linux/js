@@ -9,7 +9,7 @@
 #
 %include        /usr/lib/rpm/macros.perl
 Summary:	JavaScript Reference Implementation
-Summary(pl):	Wzorcowa implementacja JavaScriptu
+Summary(pl.UTF-8):   Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.60
 Release:	4
@@ -40,16 +40,16 @@ decompiler, garbage collector, atom manager, standard classes) and
 small "shell" program that can be used interactively and with .js
 files to run scripts.
 
-%description -l pl
+%description -l pl.UTF-8
 Wzorcowa implementacja JavaScriptu (o nazwie kodowej SpiderMonkey).
-Pakiet zawiera ¶rodowisko uruchomieniowe (kompilator, interpreter,
-dekompilator, od¶miecacz, standardowe klasy) i niewielk± pow³okê,
-która mo¿e byæ u¿ywana interaktywnie lub z plikami .js do uruchamiania
-skryptów.
+Pakiet zawiera Å›rodowisko uruchomieniowe (kompilator, interpreter,
+dekompilator, odÅ›miecacz, standardowe klasy) i niewielkÄ… powÅ‚okÄ™,
+ktÃ³ra moÅ¼e byÄ‡ uÅ¼ywana interaktywnie lub z plikami .js do uruchamiania
+skryptÃ³w.
 
 %package devel
 Summary:	Header files for JavaScript reference library
-Summary(pl):	Pliki nag³ówkowe do biblioteki JavaScript
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe do biblioteki JavaScript
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Conflicts:	njs-devel
@@ -58,12 +58,12 @@ Conflicts:	njs-devel
 %description devel
 Header files for JavaScript reference library.
 
-%description devel -l pl
-Pliki nag³ówkowe do biblioteki JavaScript.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe do biblioteki JavaScript.
 
 %package static
 Summary:	Static JavaScript reference library
-Summary(pl):	Statyczna biblioteka JavaScript
+Summary(pl.UTF-8):   Statyczna biblioteka JavaScript
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Conflicts:	njs-static
@@ -72,12 +72,12 @@ Conflicts:	njs-static
 %description static
 Static version of JavaScript reference library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna wersja biblioteki JavaScript.
 
 %package java
 Summary:	JavaScript LiveConnect Version 3 implementation
-Summary(pl):	Implementacja JavaScript LiveConnect w wersji 3
+Summary(pl.UTF-8):   Implementacja JavaScript LiveConnect w wersji 3
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Conflicts:	mozilla
@@ -93,19 +93,19 @@ Navigator browser and Netscape's server-side JavaScript. Now, it is a
 standalone library that can be embedded within other projects, such as
 the Mozilla browser.
 
-%description java -l pl
-LiveConnect to biblioteka pozwalaj±ca na wspó³pracê maszyn wirtualnych
-JavaScriptu i Javy. W szczególno¶ci pozwala z poziomu JavaScriptu na
-dostêp do pól Javy, wywo³ywanie metod Javy oraz z poziomu Javy na
-dostêp do sk³adowych obiektów JavaScriptu i wykonywanie dowolnego kodu
-w JavaScripcie. LiveConnect oryginalnie by³ zintegrowan± czê¶ci±
-przegl±darki Netscape Navigator oraz Netscape JavaScript dzia³aj±cego
-po stronie serwera. Teraz jest to samodzielna biblioteka, któr± mo¿na
-osadzaæ w innych projektach, takich jak przegl±darka Mozilla.
+%description java -l pl.UTF-8
+LiveConnect to biblioteka pozwalajÄ…ca na wspÃ³Å‚pracÄ™ maszyn wirtualnych
+JavaScriptu i Javy. W szczegÃ³lnoÅ›ci pozwala z poziomu JavaScriptu na
+dostÄ™p do pÃ³l Javy, wywoÅ‚ywanie metod Javy oraz z poziomu Javy na
+dostÄ™p do skÅ‚adowych obiektÃ³w JavaScriptu i wykonywanie dowolnego kodu
+w JavaScripcie. LiveConnect oryginalnie byÅ‚ zintegrowanÄ… czÄ™Å›ciÄ…
+przeglÄ…darki Netscape Navigator oraz Netscape JavaScript dziaÅ‚ajÄ…cego
+po stronie serwera. Teraz jest to samodzielna biblioteka, ktÃ³rÄ… moÅ¼na
+osadzaÄ‡ w innych projektach, takich jak przeglÄ…darka Mozilla.
 
 %package java-devel
 Summary:	JavaScript LiveConnect 3 implementation header files
-Summary(pl):	Pliki nag³ówkowe implementacji JavaScript LiveConnect 3
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe implementacji JavaScript LiveConnect 3
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	%{name}-java = %{epoch}:%{version}-%{release}
@@ -113,32 +113,32 @@ Requires:	%{name}-java = %{epoch}:%{version}-%{release}
 %description java-devel
 JavaScript LiveConnect 3 implementation header files.
 
-%description java-devel -l pl
-Pliki nag³ówkowe implementacji JavaScript LiveConnect 3.
+%description java-devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe implementacji JavaScript LiveConnect 3.
 
 %package java-static
 Summary:	JavaScript Live Connect 3 implementation static library
-Summary(pl):	Biblioteka statyczna implementacji JavaScript LiveConnect 3
+Summary(pl.UTF-8):   Biblioteka statyczna implementacji JavaScript LiveConnect 3
 Group:		Development/Libraries
 Requires:	%{name}-java-devel = %{epoch}:%{version}-%{release}
 
 %description java-static
 JavaScript Live Connect 3 implementation static library.
 
-%description java-static -l pl
+%description java-static -l pl.UTF-8
 Biblioteka statyczna implementacji JavaScript LiveConnect 3.
 
 %package -n perl-JS
 Summary:	JS Perl module - interface to JavaScript
-Summary(pl):	Modu³ Perla JS - interfejs do JavaScriptu
+Summary(pl.UTF-8):   ModuÅ‚ Perla JS - interfejs do JavaScriptu
 Group:		Development/Languages/Perl
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description -n perl-JS
 JS Perl module allows calling JavaScript from Perl.
 
-%description -n perl-JS -l pl
-Modu³ Perla JS pozwalaj±cy na wywo³ywanie JavaScriptu z Perla.
+%description -n perl-JS -l pl.UTF-8
+ModuÅ‚ Perla JS pozwalajÄ…cy na wywoÅ‚ywanie JavaScriptu z Perla.
 
 %prep
 %setup -q -n %{name}
