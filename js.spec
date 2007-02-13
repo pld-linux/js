@@ -180,7 +180,7 @@ cd src
 install Linux*/{js,jscpucfg} $RPM_BUILD_ROOT%{_bindir}
 install Linux*/libjs.a $RPM_BUILD_ROOT%{_libdir}
 install Linux*/libjs.so $RPM_BUILD_ROOT%{_libdir}/libjs.so.0.1.0
-ln -sf libjs.so.0 $RPM_BUILD_ROOT%{_libdir}/libjs.so
+ln -sf libjs.so.0.1.0 $RPM_BUILD_ROOT%{_libdir}/libjs.so
 install Linux*/jsautocfg.h $RPM_BUILD_ROOT%{_includedir}/js
 install js.msg jsapi.h jsarray.h jsarena.h jsatom.h jsbit.h jsbool.h \
 	jsclist.h jscntxt.h jscompat.h jsconfig.h jsdate.h jsdbgapi.h \
@@ -193,7 +193,7 @@ install js.msg jsapi.h jsarray.h jsarena.h jsatom.h jsbit.h jsbool.h \
 %if %{with java}
 install liveconnect/Linux*/libjsj.a $RPM_BUILD_ROOT%{_libdir}
 install liveconnect/Linux*/libjsj.so $RPM_BUILD_ROOT%{_libdir}/libjsj.so.0.1.0
-ln -sf libjsj.so.0 $RPM_BUILD_ROOT%{_libdir}/libjsj.so
+ln -sf libjsj.so.0.1.0 $RPM_BUILD_ROOT%{_libdir}/libjsj.so
 install liveconnect/Linux*/lcshell $RPM_BUILD_ROOT%{_bindir}
 install liveconnect/classes/Linux*/*.jar $RPM_BUILD_ROOT%{classdir}
 install liveconnect/{jsjava.h,nsI*.h,_jni/*.h} $RPM_BUILD_ROOT%{_includedir}/js
@@ -219,7 +219,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc src/README*.html
 %attr(755,root,root) %{_bindir}/js*
-%attr(755,root,root) %{_libdir}/libjs.so.*
+%attr(755,root,root) %{_libdir}/libjs.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libjs.so.0
 
 %files devel
 %defattr(644,root,root,755)
@@ -238,7 +239,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc src/liveconnect/README.html
 %attr(755,root,root) %{_bindir}/lcshell
-%attr(755,root,root) %{_libdir}/libjsj.so.*
+%attr(755,root,root) %{_libdir}/libjsj.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libjsj.so.0
 %{classdir}/*.jar
 
 %files java-devel
