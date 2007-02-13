@@ -9,7 +9,7 @@
 #
 %include        /usr/lib/rpm/macros.perl
 Summary:	JavaScript Reference Implementation
-Summary(pl.UTF-8):   Wzorcowa implementacja JavaScriptu
+Summary(pl.UTF-8):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.60
 Release:	4
@@ -49,7 +49,7 @@ skryptów.
 
 %package devel
 Summary:	Header files for JavaScript reference library
-Summary(pl.UTF-8):   Pliki nagłówkowe do biblioteki JavaScript
+Summary(pl.UTF-8):	Pliki nagłówkowe do biblioteki JavaScript
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Conflicts:	njs-devel
@@ -63,7 +63,7 @@ Pliki nagłówkowe do biblioteki JavaScript.
 
 %package static
 Summary:	Static JavaScript reference library
-Summary(pl.UTF-8):   Statyczna biblioteka JavaScript
+Summary(pl.UTF-8):	Statyczna biblioteka JavaScript
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Conflicts:	njs-static
@@ -77,7 +77,7 @@ Statyczna wersja biblioteki JavaScript.
 
 %package java
 Summary:	JavaScript LiveConnect Version 3 implementation
-Summary(pl.UTF-8):   Implementacja JavaScript LiveConnect w wersji 3
+Summary(pl.UTF-8):	Implementacja JavaScript LiveConnect w wersji 3
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Conflicts:	mozilla
@@ -105,7 +105,7 @@ osadzać w innych projektach, takich jak przeglądarka Mozilla.
 
 %package java-devel
 Summary:	JavaScript LiveConnect 3 implementation header files
-Summary(pl.UTF-8):   Pliki nagłówkowe implementacji JavaScript LiveConnect 3
+Summary(pl.UTF-8):	Pliki nagłówkowe implementacji JavaScript LiveConnect 3
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	%{name}-java = %{epoch}:%{version}-%{release}
@@ -118,7 +118,7 @@ Pliki nagłówkowe implementacji JavaScript LiveConnect 3.
 
 %package java-static
 Summary:	JavaScript Live Connect 3 implementation static library
-Summary(pl.UTF-8):   Biblioteka statyczna implementacji JavaScript LiveConnect 3
+Summary(pl.UTF-8):	Biblioteka statyczna implementacji JavaScript LiveConnect 3
 Group:		Development/Libraries
 Requires:	%{name}-java-devel = %{epoch}:%{version}-%{release}
 
@@ -130,7 +130,7 @@ Biblioteka statyczna implementacji JavaScript LiveConnect 3.
 
 %package -n perl-JS
 Summary:	JS Perl module - interface to JavaScript
-Summary(pl.UTF-8):   Moduł Perla JS - interfejs do JavaScriptu
+Summary(pl.UTF-8):	Moduł Perla JS - interfejs do JavaScriptu
 Group:		Development/Languages/Perl
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
