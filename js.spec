@@ -1,7 +1,7 @@
 #
 # Conditional build:
-%bcond_without	threads	# build thread-safe library (requires nspr)
-%bcond_with	java	# with libjsj and lshell
+%bcond_without	threads	# thread-safe library (requires nspr)
+%bcond_with	java	# libjsj and lshell
 #
 %ifarch i386 i486 ppc ppc64
 %undefine	with_java
