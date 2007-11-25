@@ -1,0 +1,36 @@
+--- js/src/liveconnect/jsj_simpleapi.c.orig	2005-07-08 00:35:39.000000000 +0200
++++ js/src/liveconnect/jsj_simpleapi.c	2007-11-19 22:01:02.871841585 +0100
+@@ -80,6 +80,33 @@
+     return the_global_js_obj;
+ }
+ 
++#ifdef JNI_VERSION_1_6
++/* not defined in JDK 1.6 jni.h - is it still supported? */
++typedef struct JDK1_1InitArgs {
++    jint version;
++
++    char **properties;
++    jint checkSource; 
++    jint nativeStackSize;
++    jint javaStackSize;
++    jint minHeapSize;
++    jint maxHeapSize;
++    jint verifyMode;
++    char *classpath;
++
++    jint (JNICALL *vfprintf)(FILE *fp, const char *format, va_list args);
++    void (JNICALL *exit)(jint code);
++    void (JNICALL *abort)();
++    
++    jint enableClassGC;
++    jint enableVerboseGC;
++    jint disableAsyncGC;
++    jint verbose;
++    jboolean debugging;
++    jint debugPort;
++} JDK1_1InitArgs;
++#endif
++
+ static JSBool JS_DLL_CALLBACK
+ default_create_java_vm(SystemJavaVM* *jvm, JNIEnv* *initialEnv, void* initargs)
+ {
