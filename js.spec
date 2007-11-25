@@ -11,14 +11,15 @@
 Summary:	JavaScript Reference Implementation
 Summary(pl.UTF-8):	Wzorcowa implementacja JavaScriptu
 Name:		js
-Version:	1.60
-Release:	4
-Epoch:		1
-License:	GPL or Netscape Public License 1.1
+Version:	1.7.0
+Release:	1
+Epoch:		2
+License:	MPL 1.1 or GPL v2+ or LGPL v2.1+
 Group:		Libraries
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}.tar.gz
-# Source0-md5:	bd8f021e43a8fbbec55ac2cd3d483243
+# Source0-md5:	5571134c3863686b623ebe4e6b1f6fe6
 Patch0:		%{name}-makefile.patch
+Patch1:		%{name}-java.patch
 URL:		http://www.mozilla.org/js/
 %{?with_java:BuildRequires:	jdk}
 %{?with_java:BuildRequires:	jpackage-utils}
@@ -27,6 +28,8 @@ BuildRequires:	perl-devel
 BuildRequires:	readline-devel
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpmbuild(macros) >= 1.294
+# dead, removed upstream
+Obsoletes:	perl-JS
 Conflicts:	njs
 %{?with_threads:Provides:	js(threads)}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -128,21 +131,10 @@ JavaScript Live Connect 3 implementation static library.
 %description java-static -l pl.UTF-8
 Biblioteka statyczna implementacji JavaScript LiveConnect 3.
 
-%package -n perl-JS
-Summary:	JS Perl module - interface to JavaScript
-Summary(pl.UTF-8):	Moduł Perla JS - interfejs do JavaScriptu
-Group:		Development/Languages/Perl
-Requires:	%{name} = %{epoch}:%{version}-%{release}
-
-%description -n perl-JS
-JS Perl module allows calling JavaScript from Perl.
-
-%description -n perl-JS -l pl.UTF-8
-Moduł Perla JS pozwalający na wywoływanie JavaScriptu z Perla.
-
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p1
 
 echo 'SONAME=libjs.so.0' >> src/Makefile.ref
 echo 'SONAME=libjsj.so.0' >> src/liveconnect/Makefile.ref
@@ -157,17 +149,6 @@ echo 'SONAME=libjsj.so.0' >> src/liveconnect/Makefile.ref
 	MKSHLIB="%{__cc} -shared -Wl,-soname=\$(SONAME)" \
 	%{?with_threads:JS_THREADSAFE=1} \
 	%{?with_java:JS_LIVECONNECT=1 JDK=%{java_home}}
-
-# js segfaults when jsperl is compiled in
-#	JS_PERLCONNECT=1
-
-cd src/perlconnect
-%{!?debug:BUILD_OPT=1} \
-%{__perl} Makefile.PL \
-	INSTALLDIRS=vendor
-
-%{__make} \
-	OPTIMIZE="%{rpmcflags}"
 
 # no UNIX makefiles
 # %{__make} -C jsd
@@ -199,11 +180,6 @@ install liveconnect/classes/Linux*/*.jar $RPM_BUILD_ROOT%{classdir}
 install liveconnect/{jsjava.h,nsI*.h,_jni/*.h} $RPM_BUILD_ROOT%{_includedir}/js
 %endif
 
-%{__make} -C perlconnect pure_install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-cp -f perlconnect/README.html README-perlconnect.html
-
 /sbin/ldconfig -n -N $RPM_BUILD_ROOT%{_libdir}
 
 %clean
@@ -217,7 +193,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc src/README*.html
+%doc src/README.html
 %attr(755,root,root) %{_bindir}/js*
 %attr(755,root,root) %{_libdir}/libjs.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libjs.so.0
@@ -253,13 +229,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libjsj.a
 %endif
-
-%files -n perl-JS
-%defattr(644,root,root,755)
-%{perl_vendorarch}/JS.pm
-%{perl_vendorarch}/jsperlbuild.pl
-%dir %{perl_vendorarch}/auto/JS
-%{perl_vendorarch}/auto/JS/JS.bs
-%attr(755,root,root) %{perl_vendorarch}/auto/JS/JS.so
-# unusable now (helper module for PerlConnect in libjs, which is not built)
-#%%{perl_vendorarch}/PerlConnect.pm
