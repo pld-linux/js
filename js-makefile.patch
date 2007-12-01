@@ -1,15 +1,15 @@
---- js/src/Makefile.ref.orig	Tue Mar 19 05:28:16 2002
-+++ js/src/Makefile.ref	Sat May 18 15:36:52 2002
-@@ -56,7 +56,7 @@
+--- js/src/Makefile.ref.orig	2006-07-26 21:16:47.000000000 +0200
++++ js/src/Makefile.ref	2007-11-19 20:11:45.382151545 +0100
+@@ -63,7 +63,7 @@
  
  ifdef JS_THREADSAFE
  DEFINES += -DJS_THREADSAFE
--INCLUDES += -I../../dist/$(OBJDIR)/include
-+INCLUDES += -I../../dist/$(OBJDIR)/include -I/usr/include/nspr
+-INCLUDES += -I$(DIST)/include/nspr
++INCLUDES += -I/usr/include/nspr
  ifdef USE_MSVC
- OTHER_LIBS += ../../dist/$(OBJDIR)/lib/libnspr${NSPR_LIBSUFFIX}.lib
+ OTHER_LIBS += $(DIST)/lib/libnspr$(NSPR_LIBSUFFIX).lib
  else
-@@ -122,7 +122,7 @@
+@@ -134,7 +134,7 @@
  ifdef JS_READLINE
  # For those platforms with the readline library installed.
  DEFINES += -DEDITLINE
@@ -18,7 +18,7 @@
  else
  ifdef JS_EDITLINE
  # Use the editline library, built locally.
-@@ -281,6 +281,7 @@
+@@ -282,6 +282,7 @@
  PROGRAM = $(OBJDIR)/js
  ifdef JS_PERLCONNECT
  PROG_LIBS += $(PERLLDFLAGS)
@@ -26,38 +26,31 @@
  endif
  endif
  
-@@ -291,7 +291,7 @@
+@@ -336,7 +337,7 @@
  	link.exe -out:"$@" $(EXE_LINK_FLAGS) $^
  else
- $(PROGRAM): $(PROG_OBJS) $(LIBRARY) $(FDLIBM_LIBRARY)
+ $(PROGRAM): $(PROG_OBJS) $(LIBRARY)
 -	$(CC) -o $@ $(CFLAGS) $(PROG_OBJS) $(LIBRARY) $(LDFLAGS) $(OTHER_LIBS) \
-+	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(PROG_OBJS) -L$(OBJDIR) -ljs $(OTHER_LIBS) \
++	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(PROG_OBJS) -L$(OBJDIR) -ljs $(LDFLAGS) $(OTHER_LIBS) \
  	    $(PROG_LIBS)
  endif
  
---- js/src/perlconnect/Makefile.PL.orig	Tue Aug 14 15:09:43 2001
-+++ js/src/perlconnect/Makefile.PL	Sat May 18 16:32:49 2002
-@@ -29,7 +29,7 @@
- include ../config.mk
+--- js/src/liveconnect/Makefile.ref.orig	2003-11-15 01:11:05.000000000 +0100
++++ js/src/liveconnect/Makefile.ref	2007-11-19 22:33:08.645585176 +0100
+@@ -103,10 +103,8 @@
  
- all:
--	@echo '$(OBJDIR)'
-+	@echo '$(OBJDIR)' >&2
- eof
+ INCLUDES   += -I. -I.. -I../$(OBJDIR)
  
- if ($foo{'m'}) {
-@@ -40,7 +40,7 @@
- 	open FOO, ">tempmakefile";
- 	print FOO $tmpmk;
- 	close FOO;
--	my $objdir = `gmake -f tempmakefile`;
-+	my $objdir = `make -f tempmakefile 2>&1 >/dev/null`;
- 	unlink "tempmakefile";
- 	$inc = "-I.. -I../$objdir";
- 	$libpath = "-L../$objdir";
---- js/src/liveconnect/Makefile.ref.orig	Tue Mar 19 05:28:45 2002
-+++ js/src/liveconnect/Makefile.ref	Sat May 18 18:40:34 2002
-@@ -125,7 +125,7 @@
+-ifdef USE_MSVC
+-OTHER_LIBS += $(DEPTH)/fdlibm/$(OBJDIR)/fdlibm.lib
+-else
+-OTHER_LIBS += -L$(DEPTH)/fdlibm/$(OBJDIR) -lfdm -L../$(OBJDIR) -ljs
++ifndef USE_MSVC
++OTHER_LIBS += -L../$(OBJDIR) -ljs
+ endif
+ 
+ #
+@@ -131,7 +129,7 @@
  
  ifdef JS_THREADSAFE
  DEFINES += -DJS_THREADSAFE
@@ -66,13 +59,14 @@
  ifdef USE_MSVC
  OTHER_LIBS += $(DEPTH)/../../dist/$(OBJDIR)/lib/libnspr${NSPR_LIBSUFFIX}.lib
  else
-@@ -159,5 +159,5 @@
+@@ -165,5 +163,6 @@
  
  $(PROGRAM): $(OBJDIR)/$(PROG_FILE).o $(OBJDIR)/jsj_simpleapi.o
  	@$(MAKE_OBJDIR)
 -	$(CC) -o $@ $(CFLAGS) $+ $(LIBRARY) ../$(OBJDIR)/libjs.a $(LDFLAGS) $(OTHER_LIBS)
 +	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $+ -L$(OBJDIR) -ljsj $(OTHER_LIBS) $(PROG_LIBS) -Wl,-rpath=$(JDK)/jre/lib/i386 -Wl,-rpath=$(JDK)/jre/lib/i386/native_threads -Wl,-rpath=$(JDK)/jre/lib/i386/classic -Wl,-rpath=$(JDK)/jre/lib/i386/client
  endif
++SONAME=libjsj.so.0
 --- js/src/liveconnect/config/Linux_All.mk.orig	Tue Mar 19 05:28:53 2002
 +++ js/src/liveconnect/config/Linux_All.mk	Sat May 18 18:51:49 2002
 @@ -45,9 +45,10 @@
