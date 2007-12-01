@@ -1,9 +1,9 @@
 #
 # Conditional build:
 %bcond_without	threads	# thread-safe library (requires nspr)
-%bcond_with	java	# libjsj and lshell
+%bcond_without	java	# libjsj and lshell
 #
-%ifarch i386 i486 ppc ppc64
+%ifnarch i586 i686 pentium3 pentium4 athlon %{x8664}
 %undefine	with_java
 %endif
 #
@@ -136,8 +136,8 @@ Biblioteka statyczna implementacji JavaScript LiveConnect 3.
 %patch0 -p1
 %patch1 -p1
 
-echo 'SONAME=libjs.so.0' >> src/Makefile.ref
-echo 'SONAME=libjsj.so.0' >> src/liveconnect/Makefile.ref
+echo 'SONAME=libjs.so.1' >> src/Makefile.ref
+echo 'SONAME=libjsj.so.1' >> src/liveconnect/Makefile.ref
 
 %build
 %{__make} -j1 -C src -f Makefile.ref \
@@ -160,27 +160,28 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_includedir}/js,%{classdir}}
 cd src
 install Linux*/{js,jscpucfg} $RPM_BUILD_ROOT%{_bindir}
 install Linux*/libjs.a $RPM_BUILD_ROOT%{_libdir}
-install Linux*/libjs.so $RPM_BUILD_ROOT%{_libdir}/libjs.so.0.1.0
-ln -sf libjs.so.0.1.0 $RPM_BUILD_ROOT%{_libdir}/libjs.so
-install Linux*/jsautocfg.h $RPM_BUILD_ROOT%{_includedir}/js
+install Linux*/libjs.so $RPM_BUILD_ROOT%{_libdir}/libjs.so.1.0.0
+ln -sf libjs.so.1.0.0 $RPM_BUILD_ROOT%{_libdir}/libjs.so.1
+ln -sf libjs.so.1.0.0 $RPM_BUILD_ROOT%{_libdir}/libjs.so
+install Linux*/{jsautocfg.h,jsautokw.h} $RPM_BUILD_ROOT%{_includedir}/js
 install js.msg jsapi.h jsarray.h jsarena.h jsatom.h jsbit.h jsbool.h \
 	jsclist.h jscntxt.h jscompat.h jsconfig.h jsdate.h jsdbgapi.h \
-	jsdhash.h jsemit.h jsfun.h jsgc.h jshash.h jsinterp.h jslock.h \
-	jslong.h jsmath.h jsnum.h jsobj.h jsopcode.tbl jsopcode.h jsosdep.h \
-	jsotypes.h jsparse.h jsprf.h jsprvtd.h jspubtd.h jsregexp.h jsscan.h \
-	jsscope.h jsscript.h jsstr.h jstypes.h jsutil.h jsxdrapi.h jsstddef.h \
+	jsdhash.h jsemit.h jsfun.h jsgc.h jshash.h jsinterp.h jsiter.h \
+	jslock.h jslong.h jsmath.h jsnum.h jsobj.h jsopcode.tbl jsopcode.h \
+	jsosdep.h jsotypes.h jsparse.h jsprf.h jsproto.tbl jsprvtd.h jspubtd.h \
+	jsregexp.h jsscan.h jsscope.h jsscript.h jsstddef.h jsstr.h jstypes.h \
+	jsutil.h jsxdrapi.h jsxml.h \
 	$RPM_BUILD_ROOT%{_includedir}/js
 
 %if %{with java}
 install liveconnect/Linux*/libjsj.a $RPM_BUILD_ROOT%{_libdir}
-install liveconnect/Linux*/libjsj.so $RPM_BUILD_ROOT%{_libdir}/libjsj.so.0.1.0
-ln -sf libjsj.so.0.1.0 $RPM_BUILD_ROOT%{_libdir}/libjsj.so
+install liveconnect/Linux*/libjsj.so $RPM_BUILD_ROOT%{_libdir}/libjsj.so.1.0.0
+ln -sf libjsj.so.1.0.0 $RPM_BUILD_ROOT%{_libdir}/libjsj.so.1
+ln -sf libjsj.so.1.0.0 $RPM_BUILD_ROOT%{_libdir}/libjsj.so
 install liveconnect/Linux*/lcshell $RPM_BUILD_ROOT%{_bindir}
 install liveconnect/classes/Linux*/*.jar $RPM_BUILD_ROOT%{classdir}
 install liveconnect/{jsjava.h,nsI*.h,_jni/*.h} $RPM_BUILD_ROOT%{_includedir}/js
 %endif
-
-/sbin/ldconfig -n -N $RPM_BUILD_ROOT%{_libdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -196,7 +197,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc src/README.html
 %attr(755,root,root) %{_bindir}/js*
 %attr(755,root,root) %{_libdir}/libjs.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libjs.so.0
+%attr(755,root,root) %ghost %{_libdir}/libjs.so.1
 
 %files devel
 %defattr(644,root,root,755)
@@ -204,6 +205,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_includedir}/js
 %{_includedir}/js/js.msg
 %{_includedir}/js/jsopcode.tbl
+%{_includedir}/js/jsproto.tbl
 %{_includedir}/js/js[!j]*.h
 
 %files static
@@ -216,8 +218,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc src/liveconnect/README.html
 %attr(755,root,root) %{_bindir}/lcshell
 %attr(755,root,root) %{_libdir}/libjsj.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libjsj.so.0
-%{classdir}/*.jar
+%attr(755,root,root) %ghost %{_libdir}/libjsj.so.1
+%{classdir}/js*.jar
 
 %files java-devel
 %defattr(644,root,root,755)
