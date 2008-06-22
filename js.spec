@@ -12,7 +12,7 @@ Summary:	JavaScript Reference Implementation
 Summary(pl.UTF-8):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.7.0
-Release:	3
+Release:	4
 Epoch:		2
 License:	MPL 1.1 or GPL v2+ or LGPL v2.1+
 Group:		Libraries
@@ -138,6 +138,11 @@ Biblioteka statyczna implementacji JavaScript LiveConnect 3.
 
 echo 'SONAME=libjs.so.1' >> src/Makefile.ref
 echo 'SONAME=libjsj.so.1' >> src/liveconnect/Makefile.ref
+
+%ifarch %{x8664}
+sed -i -e 's#i386#amd64#g' src/liveconnect/Makefile.ref src/liveconnect/config/*.mk
+sed -i -e 's#lib/amd64/client#lib/amd64/server#g' src/liveconnect/Makefile.ref src/liveconnect/config/*.mk
+%endif
 
 %build
 %{__make} -j1 -C src -f Makefile.ref \
