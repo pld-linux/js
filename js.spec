@@ -200,12 +200,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc src/README.html
-%attr(755,root,root) %{_bindir}/js*
+%attr(755,root,root) %{_bindir}/js
 %attr(755,root,root) %{_libdir}/libjs.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libjs.so.1
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/jscpucfg
 %attr(755,root,root) %{_libdir}/libjs.so
 %dir %{_includedir}/js
 %{_includedir}/js/js.msg
