@@ -12,7 +12,7 @@ Summary:	JavaScript Reference Implementation
 Summary(pl.UTF-8):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.7.0
-Release:	4
+Release:	5
 Epoch:		2
 License:	MPL 1.1 or GPL v2+ or LGPL v2.1+
 Group:		Libraries
@@ -147,7 +147,7 @@ sed -i -e 's#lib/amd64/client#lib/amd64/server#g' src/liveconnect/Makefile.ref s
 %build
 %{__make} -j1 -C src -f Makefile.ref \
 	%{!?debug:BUILD_OPT=1} \
-	OPTIMIZER="%{rpmcflags} -DHAVE_VA_COPY -DVA_COPY=va_copy" \
+	OPTIMIZER="%{rpmcflags} -DHAVE_VA_COPY -DVA_COPY=va_copy -DJS_C_STRINGS_ARE_UTF8=1" \
 	JS_READLINE=1 \
 	CC="%{__cc}" \
 	LDFLAGS="%{rpmldflags}" \
