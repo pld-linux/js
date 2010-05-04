@@ -2,11 +2,6 @@
 # Conditional build:
 %bcond_without	threads	# thread-safe library (requires nspr)
 %bcond_without	java	# libjsj and lshell
-#
-%ifnarch i586 i686 pentium3 pentium4 athlon %{x8664}
-%undefine	with_java
-%endif
-#
 %include        /usr/lib/rpm/macros.perl
 Summary:	JavaScript Reference Implementation
 Summary(pl.UTF-8):	Wzorcowa implementacja JavaScriptu
