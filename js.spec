@@ -2,15 +2,16 @@
 # Conditional build:
 %bcond_without	threads	# thread-safe library (requires nspr)
 %bcond_without	java	# libjsj and lshell
+#
 %include        /usr/lib/rpm/macros.perl
 Summary:	JavaScript Reference Implementation
 Summary(pl.UTF-8):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.7.0
-Release:	7
+Release:	8
 Epoch:		2
 License:	MPL 1.1 or GPL v2+ or LGPL v2.1+
-Group:		Libraries
+Group:		Development/Languages
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}.tar.gz
 # Source0-md5:	5571134c3863686b623ebe4e6b1f6fe6
 Patch0:		%{name}-makefile.patch
@@ -23,6 +24,7 @@ BuildRequires:	perl-devel
 BuildRequires:	readline-devel
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpmbuild(macros) >= 1.294
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 # dead, removed upstream
 Obsoletes:	perl-JS
 Conflicts:	njs
@@ -45,11 +47,23 @@ dekompilator, odśmiecacz, standardowe klasy) i niewielką powłokę,
 która może być używana interaktywnie lub z plikami .js do uruchamiania
 skryptów.
 
+%package libs
+Summary:	JavaScript Reference Implementation library
+Summary(pl.UTF-8):	Biblioteka wzorcowej implementacja JavaScriptu
+Group:		Libraries
+Conflicts:	js < 1.7.0-8
+
+%description libs
+JavaScript Reference Implementation (codename SpiderMonkey) library.
+
+%description libs -l pl.UTF-8
+Biblioteka wzorcowej implementacja JavaScriptu (SpiderMonkey).
+
 %package devel
 Summary:	Header files for JavaScript reference library
 Summary(pl.UTF-8):	Pliki nagłówkowe do biblioteki JavaScript
 Group:		Development/Libraries
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Conflicts:	njs-devel
 %{?with_threads:Provides:	js-devel(threads)}
 
@@ -186,8 +200,8 @@ install liveconnect/{jsjava.h,nsI*.h,_jni/*.h} $RPM_BUILD_ROOT%{_includedir}/js
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %post	java -p /sbin/ldconfig
 %postun	java -p /sbin/ldconfig
@@ -196,6 +210,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc src/README.html
 %attr(755,root,root) %{_bindir}/js
+
+%files libs
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libjs.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libjs.so.1
 
