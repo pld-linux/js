@@ -8,7 +8,7 @@ Summary:	JavaScript Reference Implementation
 Summary(pl.UTF-8):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.7.0
-Release:	8
+Release:	9
 Epoch:		2
 License:	MPL 1.1 or GPL v2+ or LGPL v2.1+
 Group:		Development/Languages
