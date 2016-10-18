@@ -1,0 +1,11 @@
+--- js/src/js.c~	2007-04-20 20:45:18.000000000 +0200
++++ js/src/js.c	2016-10-18 22:22:16.509762977 +0200
+@@ -160,7 +160,7 @@
+ #endif
+     {
+         char line[256];
+-        fprintf(gOutFile, prompt);
++        fprintf(gOutFile, "%s", prompt);
+         fflush(gOutFile);
+         if (!fgets(line, sizeof line, file))
+             return JS_FALSE;

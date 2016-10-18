@@ -8,7 +8,7 @@ Summary:	JavaScript Reference Implementation
 Summary(pl.UTF-8):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.7.0
-Release:	9
+Release:	10
 Epoch:		2
 License:	MPL 1.1 or GPL v2+ or LGPL v2.1+
 Group:		Development/Languages
@@ -16,6 +16,7 @@ Source0:	http://ftp.mozilla.org/pub/mozilla.org/js/%{name}-%{version}.tar.gz
 # Source0-md5:	5571134c3863686b623ebe4e6b1f6fe6
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-java.patch
+Patch2:		%{name}-build.patch
 URL:		http://www.mozilla.org/js/
 %{?with_java:BuildRequires:	jdk}
 %{?with_java:BuildRequires:	jpackage-utils}
@@ -144,6 +145,7 @@ Biblioteka statyczna implementacji JavaScript LiveConnect 3.
 %setup -q -n %{name}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 echo 'SONAME=libjs.so.1' >> src/Makefile.ref
 echo 'SONAME=libjsj.so.1' >> src/liveconnect/Makefile.ref
