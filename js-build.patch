@@ -9,3 +9,14 @@
          fflush(gOutFile);
          if (!fgets(line, sizeof line, file))
              return JS_FALSE;
+--- js/src/config/Linux_All.mk~	2005-05-10 21:53:44.000000000 +0200
++++ js/src/config/Linux_All.mk	2019-10-17 22:09:03.383335550 +0200
+@@ -43,7 +43,7 @@
+ 
+ CC = gcc
+ CCC = g++
+-CFLAGS +=  -Wall -Wno-format
++CFLAGS +=  -Wall
+ OS_CFLAGS = -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R
+ 
+ RANLIB = echo
