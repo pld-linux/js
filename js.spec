@@ -3,7 +3,6 @@
 %bcond_without	threads	# thread-safe library (requires nspr)
 %bcond_without	java	# libjsj and lshell
 #
-%include        /usr/lib/rpm/macros.perl
 Summary:	JavaScript Reference Implementation
 Summary(pl.UTF-8):	Wzorcowa implementacja JavaScriptu
 Name:		js
