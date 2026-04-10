@@ -1,13 +1,13 @@
 #
 # Conditional build:
 %bcond_without	threads	# thread-safe library (requires nspr)
-%bcond_without	java	# libjsj and lshell
+%bcond_with	java	# libjsj and lshell (LiveConnect, dead technology)
 #
 Summary:	JavaScript Reference Implementation
 Summary(pl.UTF-8):	Wzorcowa implementacja JavaScriptu
 Name:		js
 Version:	1.7.0
-Release:	13
+Release:	14
 Epoch:		2
 License:	MPL 1.1 or GPL v2+ or LGPL v2.1+
 Group:		Development/Languages
