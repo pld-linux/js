@@ -1,0 +1,11 @@
+--- js/src/jsapi.c.orig	2007-10-03 00:04:17.000000000 +0000
++++ js/src/jsapi.c	2026-04-10 00:00:00.000000000 +0000
+@@ -90,7 +90,7 @@
+ #include "jsiter.h"
+ #endif
+
+-#ifdef HAVE_VA_LIST_AS_ARRAY
++#if defined(HAVE_VA_LIST_AS_ARRAY) || defined(__x86_64__)
+ #define JS_ADDRESSOF_VA_LIST(ap) ((va_list *)(ap))
+ #else
+ #define JS_ADDRESSOF_VA_LIST(ap) (&(ap))

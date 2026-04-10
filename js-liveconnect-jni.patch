@@ -1,0 +1,20 @@
+--- js/src/liveconnect/jsj_simpleapi.c.orig	2026-04-10 22:42:14.996425232 +0200
++++ js/src/liveconnect/jsj_simpleapi.c	2026-04-10 22:42:26.366730217 +0200
+@@ -135,7 +135,7 @@
+         vm_args.classpath = (char*)full_classpath;
+     }
+ 
+-    err = JNI_CreateJavaVM((JavaVM**)jvm, initialEnv, &vm_args);
++    err = JNI_CreateJavaVM((JavaVM**)jvm, (void **)initialEnv, &vm_args);
+     
+     if (full_classpath)
+         JS_smprintf_free(full_classpath);
+@@ -156,7 +156,7 @@
+ {
+     JavaVM* java_vm = (JavaVM*)jvm;
+     JNIEnv* env = NULL;
+-    (*java_vm)->AttachCurrentThread(java_vm, &env, NULL);
++    (*java_vm)->AttachCurrentThread(java_vm, (void **)&env, NULL);
+     return env;
+ }
+ 
